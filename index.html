@@ -405,9 +405,7 @@
       position: relative;
       width: 100%;
       height: 100vh;
-      background: 
-        linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(45, 212, 191, 0.85) 100%),
-        url('images/HeLa-I.jpg') center/cover;
+      background: #1e293b;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -415,50 +413,26 @@
       padding-top: 60px;
       overflow: hidden;
     }
-    
-    header::before {
-      content: '';
+
+    #hero-canvas {
       position: absolute;
       top: 0;
       left: 0;
-      right: 0;
-      bottom: 0;
-      background: 
-        radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.4) 0%, transparent 40%),
-        radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.3) 0%, transparent 40%),
-        radial-gradient(circle at 60% 80%, rgba(45, 212, 191, 0.3) 0%, transparent 40%);
-      pointer-events: none;
-      animation: floatingGradient 20s ease-in-out infinite;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
     }
-    
-    @keyframes floatingGradient {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(-20px, -20px) scale(1.05); }
-      66% { transform: translate(20px, -10px) scale(0.95); }
-    }
-    
-    header::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      right: -50%;
-      bottom: -50%;
-      background: 
-        repeating-linear-gradient(
-          45deg,
-          transparent,
-          transparent 10px,
-          rgba(255, 255, 255, 0.02) 10px,
-          rgba(255, 255, 255, 0.02) 20px
-        );
-      animation: diagonalSlide 20s linear infinite;
-      pointer-events: none;
-    }
-    
-    @keyframes diagonalSlide {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(28px, 28px); }
+
+    /* Reduced motion fallback */
+    @media (prefers-reduced-motion: reduce) {
+      #hero-canvas {
+        display: none;
+      }
+      header {
+        background:
+          linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(45, 212, 191, 0.85) 100%),
+          url('images/HeLa-I.jpg') center/cover;
+      }
     }
     
     /* Hero Logo: using the white version on dark backgrounds */
@@ -513,7 +487,35 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 30px rgba(45, 212, 191, 0.4);
     }
-    
+
+    .hero-cta-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      background: transparent;
+      color: #fff;
+      padding: 1rem 2rem;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.8);
+      transform: translateY(-2px);
+    }
+
     /* Section Styling */
     section {
       padding: 4rem 2%;
@@ -1075,12 +1077,12 @@
       </div>
       <ul id="nav-menu">
         <li><a href="#about">About</a></li>
-        <li><a href="#team">Team</a></li>
         <li><a href="#technology">Technology</a></li>
+        <li><a href="#benefits">Benefits</a></li>
         <li><a href="#services">Services</a></li>
+        <li><a href="#team">Team</a></li>
         <li><a href="#research">Research</a></li>
         <li><a href="#news">News</a></li>
-        <li><a href="#benefits">Benefits</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -1089,12 +1091,16 @@
 
   <!-- Hero Section -->
   <header>
+    <canvas id="hero-canvas"></canvas>
     <div class="container">
       <!-- Hero Logo -->
       <img src="images/logo-white.png" alt="SyntaxisBio Logo" class="hero-logo" width="480" height="auto">
       <h1>Unclonable Cellular Identification</h1>
-      <p>Revolutionary genetic PUF technology for reliable biomedical research. Track cell line provenance and age with precision.</p>
-      <a class="btn-primary" href="#about">Discover More</a>
+      <p>Genetic PUFs encode provenance, lineage, and age directly into cells.</p>
+      <div class="hero-cta-group">
+        <a class="btn-primary" href="#technology">Explore the Technology</a>
+        <a class="btn-secondary" href="#services">View Services</a>
+      </div>
     </div>
   </header>
 
@@ -1109,37 +1115,6 @@
     </div>
   </section>
 
-  <!-- Team Section -->
-  <section id="team" style="background-color: var(--light-bg);">
-    <div class="container">
-      <h2>Our Team</h2>
-      <p>Meet the experts behind SyntaxisBio's innovative genetic PUF technology.</p>
-      <div class="team-grid">
-        <!-- Team Member 1 -->
-        <div class="team-card">
-          <img src="images/LeoBleris.jpg" alt="Dr. Leo Bleris" loading="lazy" width="120" height="120">
-          <h4>Dr. Leo Bleris</h4>
-          <div class="credentials">Co-Founder and CSO</div>
-          <p>Expert in synthetic biology and genome editing, pioneering the development of genetic PUF technology for cellular identification.</p>
-        </div>
-        <!-- Team Member 2 -->
-        <div class="team-card">
-          <img src="images/YiorgosMakris.jpg" alt="Dr. Yiorgos Makris" loading="lazy" width="120" height="120">
-          <h4>Dr. Yiorgos Makris</h4>
-          <div class="credentials">Co-Founder and Advisor</div>
-          <p>Expert in hardware security and PUF technologies, translating semiconductor security concepts to biological systems.</p>
-        </div>
-        <!-- Team Member 3 -->
-        <div class="team-card">
-          <img src="images/AlexanderPertsemlidis.jpg" alt="Dr. Alex Pertsemlidis" loading="lazy" width="120" height="120">
-          <h4>Dr. Alex Pertsemlidis</h4>
-          <div class="credentials">Co-Founder and CEO</div>
-          <p>Expert in genomics and bioinformatics, developing computational approaches for genetic PUF analysis and validation.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Technology Section -->
   <section id="technology">
     <div class="container">
@@ -1151,11 +1126,22 @@
             By combining molecular barcoding with CRISPR-induced DNA repair mechanisms, we embed unique, robust, and unclonable identifiers into cell lines.
           </p>
           <p>
-            This breakthrough not only tracks cell line provenance but also creates a “cellular clock” using advanced machine learning algorithms,
+            This breakthrough not only tracks cell line provenance but also creates a cellular clock that can be read by trained machine learning models,
             ensuring that every experimental outcome is reproducible and reliable.
           </p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section id="benefits">
+    <div class="container">
+      <h2>Benefits</h2>
+      <p>
+        Our innovative approach addresses issues like cell line misidentification and contamination,
+        ensuring high-quality and reproducible biomedical research outcomes.
+      </p>
     </div>
   </section>
 
@@ -1273,9 +1259,8 @@
           </div>
         </div>
 
-        <!-- Service 2: Authenticated Cell Line Engineering (RECOMMENDED) -->
+        <!-- Service 2: Authenticated Cell Line Engineering -->
         <div class="service-card" style="border: 3px solid var(--accent-color); position: relative;">
-          <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--accent-color); color: white; padding: 0.5rem 1.5rem; border-radius: 20px; font-weight: 700; font-size: 0.85rem;">RECOMMENDED</div>
           <div class="service-card-header">
             <h3>Authenticated Pro</h3>
           </div>
@@ -1299,9 +1284,6 @@
 
             <h4 style="color: var(--primary-color); margin: 1rem 0 0.5rem 0;">Best For</h4>
             <p style="margin-bottom: 1rem;">Pharmaceutical companies, core facilities, and researchers requiring verified cell line provenance and reproducibility</p>
-
-            <h4 style="color: var(--accent-color); margin: 1rem 0 0.5rem 0;">Why This Matters</h4>
-            <p style="margin-bottom: 1rem; font-size: 0.9rem;">Cell line misidentification costs billions annually in wasted research. PUF authentication provides unclonable identification and passage tracking that ensures experimental validity.</p>
 
             <div style="background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); color: white; padding: 1rem; border-radius: 8px; text-align: center; margin-top: 1.5rem;">
               <div style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 0.25rem;">Starting at</div>
@@ -1463,6 +1445,37 @@
     </div>
   </section>
 
+  <!-- Team Section -->
+  <section id="team" style="background-color: var(--light-bg);">
+    <div class="container">
+      <h2>Our Team</h2>
+      <p>Meet the experts behind SyntaxisBio's innovative genetic PUF technology.</p>
+      <div class="team-grid">
+        <!-- Team Member 1 -->
+        <div class="team-card">
+          <img src="images/LeoBleris.jpg" alt="Dr. Leo Bleris" loading="lazy" width="120" height="120">
+          <h4>Dr. Leo Bleris</h4>
+          <div class="credentials">Co-Founder and CSO</div>
+          <p>Expert in synthetic biology and genome editing, pioneering the development of genetic PUF technology for cellular identification.</p>
+        </div>
+        <!-- Team Member 2 -->
+        <div class="team-card">
+          <img src="images/YiorgosMakris.jpg" alt="Dr. Yiorgos Makris" loading="lazy" width="120" height="120">
+          <h4>Dr. Yiorgos Makris</h4>
+          <div class="credentials">Co-Founder and Advisor</div>
+          <p>Expert in hardware security and PUF technologies, translating semiconductor security concepts to biological systems.</p>
+        </div>
+        <!-- Team Member 3 -->
+        <div class="team-card">
+          <img src="images/AlexanderPertsemlidis.jpg" alt="Dr. Alex Pertsemlidis" loading="lazy" width="120" height="120">
+          <h4>Dr. Alex Pertsemlidis</h4>
+          <div class="credentials">Co-Founder and CEO</div>
+          <p>Expert in genomics and bioinformatics, developing computational approaches for genetic PUF analysis and validation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Research Section -->
   <section id="research">
     <div class="container">
@@ -1572,17 +1585,6 @@
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Benefits Section -->
-  <section id="benefits">
-    <div class="container">
-      <h2>Benefits</h2>
-      <p>
-        Our innovative approach addresses issues like cell line misidentification and contamination,
-        ensuring high-quality and reproducible biomedical research outcomes.
-      </p>
     </div>
   </section>
 
@@ -1756,6 +1758,7 @@
     </div>
   </footer>
 
+  <script src="hero-engine.js" defer></script>
   <script>
     function toggleMenu() {
       const menu = document.getElementById('nav-menu');
